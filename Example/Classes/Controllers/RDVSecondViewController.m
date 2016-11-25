@@ -23,7 +23,7 @@
 
 #import "RDVSecondViewController.h"
 #import "RDVTabBarController.h"
-
+#import "RDVTabBarItem.h"
 @implementation RDVSecondViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -39,7 +39,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    [[self rdv_tabBarItem] setBadgeValue:@"33+3"];
     if (self.rdv_tabBarController.tabBar.translucent) {
         UIEdgeInsets insets = UIEdgeInsetsMake(0,
                                                0,
@@ -51,7 +51,7 @@
     }
 }
 
-- (NSUInteger)supportedInterfaceOrientations {
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
         return UIInterfaceOrientationMaskAll;
     } else {

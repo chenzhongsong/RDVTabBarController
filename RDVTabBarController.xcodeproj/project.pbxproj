@@ -289,6 +289,11 @@
 				CLASSPREFIX = RDV;
 				LastUpgradeCheck = 0460;
 				ORGANIZATIONNAME = "Robert Dimitrov";
+				TargetAttributes = {
+					B4616BAA17228DF700863892 = {
+						DevelopmentTeam = 82JWWP84NH;
+					};
+				};
 			};
 			buildConfigurationList = B4616BA617228DF700863892 /* Build configuration list for PBXProject "RDVTabBarController" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -440,6 +445,8 @@
 		B4616BC917228DF700863892 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				DEVELOPMENT_TEAM = 82JWWP84NH;
+				ENABLE_BITCODE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Example/RDVTabBarController-Prefix.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/Example/RDVTabBarController-Info.plist";
@@ -452,6 +459,8 @@
 		B4616BCA17228DF700863892 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				DEVELOPMENT_TEAM = 82JWWP84NH;
+				ENABLE_BITCODE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Example/RDVTabBarController-Prefix.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/Example/RDVTabBarController-Info.plist";

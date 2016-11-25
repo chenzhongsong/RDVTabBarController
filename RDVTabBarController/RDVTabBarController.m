@@ -52,9 +52,9 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
+    //没有设置selectedIndex的值，默认是0
     [self setSelectedIndex:[self selectedIndex]];
-    
+    //没有设置isTabBarHidden的值，默认是NO
     [self setTabBarHidden:self.isTabBarHidden animated:NO];
 }
 -(void)viewDidLayoutSubviews{
@@ -66,12 +66,12 @@
 - (UIStatusBarStyle)preferredStatusBarStyle {
     return self.selectedViewController.preferredStatusBarStyle;
 }
-
+//preferred adj. 首选的
 - (UIStatusBarAnimation)preferredStatusBarUpdateAnimation {
     return self.selectedViewController.preferredStatusBarUpdateAnimation;
 }
 
-- (NSUInteger)supportedInterfaceOrientations {
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
     UIInterfaceOrientationMask orientationMask = UIInterfaceOrientationMaskAll;
     for (UIViewController *viewController in [self viewControllers]) {
         if (![viewController respondsToSelector:@selector(supportedInterfaceOrientations)]) {
@@ -123,8 +123,8 @@
     [[[self selectedViewController] view] setFrame:[[self contentView] bounds]];
     [[self contentView] addSubview:[[self selectedViewController] view]];
     [[self selectedViewController] didMoveToParentViewController:self];
-    
-    [self setNeedsStatusBarAppearanceUpdate];
+    //Appearance    n. 出现, 显露, 露面, 外观, 外貌, 外表
+    [self setNeedsStatusBarAppearanceUpdate];//更新状态栏
 }
 
 - (void)setViewControllers:(NSArray *)viewControllers {
@@ -145,12 +145,14 @@
             RDVTabBarItem *tabBarItem = [[RDVTabBarItem alloc] init];
             [tabBarItem setTitle:viewController.title];
             [tabBarItems addObject:tabBarItem];
+            //设置关联
             [viewController rdv_setTabBarController:self];
         }
         
         [[self tabBar] setItems:tabBarItems];
     } else {
         for (UIViewController *viewController in _viewControllers) {
+            //断开关联，使用remove的那个函数是断开所有关联，不建议使用
             [viewController rdv_setTabBarController:nil];
         }
         
@@ -274,11 +276,11 @@
 @end
 
 #pragma mark - UIViewController+RDVTabBarControllerItem
-
+//Internal  adj. 国内的；内部的；内在的
 @implementation UIViewController (RDVTabBarControllerItemInternal)
-
+//把RDVTabBarController(关联的对象)和UIViewController(与谁关联，源对象)进行关联  ,
 - (void)rdv_setTabBarController:(RDVTabBarController *)tabBarController {
-    objc_setAssociatedObject(self, @selector(rdv_tabBarController), tabBarController, OBJC_ASSOCIATION_ASSIGN);
+    objc_setAssociatedObject(self, @"a"/*@selector(rdv_tabBarController)*/, tabBarController, OBJC_ASSOCIATION_ASSIGN);
 }
 
 @end
@@ -286,7 +288,7 @@
 @implementation UIViewController (RDVTabBarControllerItem)
 
 - (RDVTabBarController *)rdv_tabBarController {
-    RDVTabBarController *tabBarController = objc_getAssociatedObject(self, @selector(rdv_tabBarController));
+    RDVTabBarController *tabBarController = objc_getAssociatedObject(self, @"a"/*@selector(rdv_tabBarController)*/);
     
     if (!tabBarController && self.parentViewController) {
         tabBarController = [self.parentViewController rdv_tabBarController];

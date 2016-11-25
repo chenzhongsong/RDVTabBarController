@@ -52,14 +52,14 @@
 - (id)init {
     return [self initWithFrame:CGRectZero];
 }
-
+//1.添加背景视图
 - (void)commonInitialization {
     _backgroundView = [[UIView alloc] init];
     [self addSubview:_backgroundView];
     
     [self setTranslucent:NO];
 }
-
+//3.布局子视图
 - (void)layoutSubviews {
     CGSize frameSize = self.frame.size;
     CGFloat minimumContentHeight = [self minimumContentHeight];
@@ -84,7 +84,7 @@
         [item setFrame:CGRectMake(self.contentEdgeInsets.left + (index * self.itemWidth),
                                   roundf(frameSize.height - itemHeight) - self.contentEdgeInsets.top,
                                   self.itemWidth, itemHeight - self.contentEdgeInsets.bottom)];
-        [item setNeedsDisplay];
+        [item setNeedsDisplay];//调用 item 的drawReact方法
         
         index++;
     }
@@ -97,7 +97,7 @@
         _itemWidth = itemWidth;
     }
 }
-
+//2.设置items时把tabBarItem添加上
 - (void)setItems:(NSArray *)items {
     for (RDVTabBarItem *item in _items) {
         [item removeFromSuperview];
